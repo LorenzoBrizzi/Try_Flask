@@ -9,17 +9,32 @@
 
 
 
-from flask import Flask
+from flask import Flask, render_template        #render termplate per poter importare file html
 app = Flask(__name__)
+
+post = [
+    {
+        "author" : "Corey Schafer",
+        'title' : "Blog Post 1",
+        "content" : "first post content",
+        "date posted" : "april 20, 2018"
+    },
+    {
+        "author": "Franco il pescio",
+        'title': "Il mondo visto da un genio",
+        "content": "GONGOLFIERA",
+        "date posted": "march 20, 2024"
+    }
+]
 
 @app.route("/")                                 #dopo lo shalsh si matte la pagina e se si vuole mettere la stessa funzione in piu pagine basta fare come qui aggiungendo decorators alla stessa funzione
 @app.route("/home")
 def home_page():
-    return "<h1>Home Page</h1>"
+    return render_template("home.html", posts=post)         #qui inserisco il template a cui accedo
 
 @app.route("/about")
 def About():
-    return "<h2>About</h2>"
+    return render_template("about.html")
 
 
 
